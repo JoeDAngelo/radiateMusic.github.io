@@ -12,34 +12,37 @@ $artists = do_shortcode('[select_artists numberartists="10"]');*/
 
 
 	$args = array(
-        'posts_per_page' => 10,
-        'product_cat' => 'songs',
-        'post_type' => 'product',
+        'posts_per_page' => -1,
+        'post_type' => 'musician',
     );
-	$songs = new WP_Query( $args );
-
-	while ($songs->have_posts()) {
-		$songs->the_post();
-		$obj = wc_get_product($post->ID);
-		/*var_dump($obj);*/
-		$songArray[] = new Song($obj);
+	$musicians = new WP_Query( $args );
+	$ma = array();
+	while ($musicians->have_posts()) {
+		$musicians->the_post();
+		$ma[] = new MusicianHandler($post->id);
 	}
 	wp_reset_postdata();
+
+	var_dump($ma);
 
 	$args = array(
         'posts_per_page' => 10,
-        'product_cat' => 'shirts',
-        'post_type' => 'product',
+        'post_type' => 'song',
     );
-	$shirts = new WP_Query( $args );
+	$songs = new WP_Query( $args );
 
-	while ($shirts->have_posts()) {
-		$shirts->the_post();
-		$obj = wc_get_product($post->ID);
-		/*var_dump($obj);*/
-		$shirtArray[] = new Shirt($obj);
+	$sa = array();
+	while ($songs->have_posts()) {
+		$songs->the_post();
+		$sa[] = new SongHandler($post->id);
 	}
 	wp_reset_postdata();
+
+	var_dump($sa);
+
+
+
+	
 get_header(); ?>
 	<?php masterslider(1); ?>
 	<div class="site-container">

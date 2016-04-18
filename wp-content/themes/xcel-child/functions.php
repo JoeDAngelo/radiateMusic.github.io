@@ -7,6 +7,7 @@ function theme_enqueue_styles() {
 }
 require get_stylesheet_directory() . '/classes/MusicianHandler.php';
 require get_stylesheet_directory() . '/classes/ArtistHandler.php';
+require get_stylesheet_directory() . '/classes/SongHandler.php';
 function music_script() {
     wp_enqueue_script( 'music', get_stylesheet_directory_uri() . '/js/music.js', array( 'jquery' ) );
 }

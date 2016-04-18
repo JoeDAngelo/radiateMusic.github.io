@@ -1,26 +1,25 @@
 <?php
-
-require get_stylesheet_directory() . '/classes/Song.php';
 class MusicianHandler {
 	public $id;
-	public $songs = array();
+	public $songs;
 	public $name;
-    public $img;
+    public $image;
+    public $video;
+    public $hometown;
+    public $state;
     public $description;
 
     public function __construct($id)
     {
         $this->id = $id;
         $this->name = get_the_title($id);
-        $this->img = get_the_post_thumbnail ($id);
-        $this->description = get_field('musician_description', $this->id);
-
+        $this->description = get_field('musician_description', $id);
+        $this->songs = get_field('songs', $id);
+        $this->image = get_field('image', $id);
+        $this->video = get_field('video', $id);
+        $this->hometown = get_field('hometown', $id);
+        $this->state = get_field('state', $id);
         //load all woocommerce objects attached to this post
-    	$song_posts = get_field('musician_woocomemrce_product',$this->id);
-    	foreach ($song_posts as $sp) {
-    		$songs[] = wc_get_product($sp->ID);
-    	}
-		$this->songs = $this->loadSongs($songs);
     }
     //loads song object array from an array of wc objects
     public function loadSongs($wc_objs)

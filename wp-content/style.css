@@ -5268,4 +5268,17 @@ Label the data
     border: 0;
   }
 }
+/*Time to go Mobile*/
+@media (max-width: 320px){
+.blurb{
+    display:none !important;
+  }
+}
+
+
+
+
+
+
+
 /* END Make the cart table responsive */
